@@ -4,3 +4,24 @@ body {
   font-family: 'Public Sans', sans-serif;
   box-sizing: border-box;
 }
+
+/* Custom CodeMirror Styles */
+.cm-editor {
+  background-color: #444654; /* Background color */
+  color: white; /* Text color */
+  font-size: 14px; /* Font size */
+}
+
+.ͼ1 .cm-gutters {
+  background-color: #444654; /* Background color */
+}
+
+.cm-gutter > .cm-gutterElement {
+  background-color: #444654; /* Background color */
+  color: white; /* Text color */
+  font-size: 14px; /* Font size */
+}
+
+/* .ͼ1 {
+
+} */

@@ -2,15 +2,27 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Zamok Webview API</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zamok Webview API</title>
 </head>
 
-<body>
-	<h1 class="text-3xl font-bold">Zamok API Demo</h1>
+<body class="bg-[#F8FBFD]">
+  <h1 class="text-3xl font-bold text-[#232323]">Zamok API Demo</h1>
 
-	<script src="https://cdn.tailwindcss.com"></script>
+  <div class="grid grid-cols-3 gap-6 p-10 shadow w-11/12 mx-auto">
+    <div class="space-y-4">
+      <div>
+        <label for="action-payload" class="text-lg">ACTION</label>
+        <!-- <textarea type="text" class="py-2 px-4 w-full block border border-gray focus:outline-none" id="action-payload"></textarea> -->
+        <div id="action-payload"></div>
+      </div>
+      <button id="fire" class="border rounded border-[#232323] p-2 block ml-auto hover:bg-[#232323] hover:text-white transition">RUN ACTION</button>
+    </div>
+
+    <div class="p-4 text-white text-xl w-full col-span-2" id="json-container"></div>
+  </div>
+  <script src="https://cdn.tailwindcss.com"></script>
 </body>
 
 </html>
