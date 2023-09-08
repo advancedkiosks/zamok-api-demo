@@ -1,11 +1,11 @@
-import '../styles/styles.css';
-import JSONFormatter from 'json-formatter-js';
 import { EditorState } from '@codemirror/state';
 import { EditorView } from '@codemirror/view';
 import { basicSetup } from 'codemirror';
+import JSONFormatter from 'json-formatter-js';
+import '../styles/styles.css';
+import convertStringToObject from './utils/convertStringToObject';
 
-// import
-
+// JSON Viewer
 const dummyState = {
   state0: {
     test: '1234',
@@ -33,6 +33,7 @@ const formatter = new JSONFormatter(dummyState, {
 
 document.getElementById('json-container').appendChild(formatter.render());
 
+// JSON Editor
 const state = EditorState.create({
   doc: `{
   type: '',
@@ -49,16 +50,9 @@ const codeEditor = new EditorView({
 const button = document.getElementById('fire');
 
 const dispatch = () => {
-  try {
-    const plainText = JSON.stringify(codeEditor.state.doc.toString().replace(/\n/g, ''));
-    const noSpaces = plainText.replace(/\s/g, '');
-    const trim = noSpaces.trim();
-    console.log(JSON.parse(trim));
-    // console.log(codeEditor);
-  } catch (error) {
-    console.log(error);
-    alert('Invalid payload');
-  }
+  const action = convertStringToObject(codeEditor.state.doc.toString());
+
+  console.log(action);
 };
 
 button.addEventListener('click', dispatch);
