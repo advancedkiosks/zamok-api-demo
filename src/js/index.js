@@ -26,12 +26,14 @@ const dummyState = {
   },
 };
 
-const formatter = new JSONFormatter(dummyState, {
+const formatter = new JSONFormatter(dummyState, 1, {
   animateOpen: true,
   animateClose: true,
 });
 
 document.getElementById('json-container').appendChild(formatter.render());
+
+document.querySelector('.json-formatter-constructor-name').textContent = 'Initial State';
 
 // JSON Editor
 const state = EditorState.create({

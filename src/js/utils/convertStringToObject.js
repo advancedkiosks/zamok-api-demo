@@ -1,8 +1,11 @@
 const convertStringToObject = (string) => {
   try {
     const plainText = JSON.stringify(string.replace(/\n/g, ''));
-    const doubleQuotes = plainText.replace(/\s/g, '').replace(/'/g, '"');
-    const jsonText = doubleQuotes
+    const jsonText = plainText
+      .replace(/\s/g, '') // remove all blank spaces
+      .replace(/"/g, "'") // convert all double quotes to single quotes
+      .replace(/\\/g, '') // remove all \
+      .replace(/'/g, '"') // change single quotes to double quotes
       .trim() // remove all empty spaces in start and end
       .replace(/,\s*(?=[\]}])/g, '') // remove all comma beside the closing bracket } or ]
       .replace(/(\w+:)|(\w+ :)/g, (matchedStr) => '"' + matchedStr.substring(0, matchedStr.length - 1) + '":') // make the object key into a JSON key
