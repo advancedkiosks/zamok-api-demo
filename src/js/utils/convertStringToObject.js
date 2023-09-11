@@ -3,7 +3,6 @@ const convertStringToObject = (string) => {
     const plainText = JSON.stringify(string.replace(/\n/g, ''));
     const jsonText = plainText
       .replace(/\s/g, '') // remove all blank spaces
-      .replace(/"/g, "'") // convert all double quotes to single quotes
       .replace(/\\/g, '') // remove all \
       .replace(/'/g, '"') // change single quotes to double quotes
       .trim() // remove all empty spaces in start and end
