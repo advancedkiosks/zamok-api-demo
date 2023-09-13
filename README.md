@@ -8,7 +8,7 @@ Example usage of the Zamok WebView API
 2. ```
    git clone git@github.com:YOUR_USERNAME/zamok-api-demo.git
    cd zamok-api-demo
-	 git checkout dev
+   git checkout dev
    npm install -g yarn
    yarn
    yarn start
