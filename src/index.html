@@ -14,13 +14,18 @@
     <div class="space-y-4">
       <div>
         <label for="action-payload" class="text-lg">ACTION</label>
-        <!-- <textarea type="text" class="py-2 px-4 w-full block border border-gray focus:outline-none" id="action-payload"></textarea> -->
         <div id="action-payload"></div>
       </div>
       <button id="fire" class="border rounded border-[#232323] p-2 block ml-auto hover:bg-[#232323] hover:text-white transition">RUN ACTION</button>
     </div>
-
-    <div class="p-4 text-white text-xl w-full col-span-2" id="json-container"></div>
+    <div>
+      <p class="text-lg">Initial State</p>
+      <div class="px-4 text-white text-xl w-full" id="json-container"></div>
+    </div>
+    <div>
+      <p class="text-lg">Difference</p>
+      <div class="px-4 text-white text-xl w-full" id="json-container-2"></div>
+    </div>
   </div>
   <script src="https://cdn.tailwindcss.com"></script>
 </body>

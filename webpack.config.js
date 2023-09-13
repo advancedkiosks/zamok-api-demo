@@ -21,4 +21,7 @@ module.exports = {
       inject: 'head',
     }),
   ],
+  devServer: {
+    port: 8081,
+  },
 };
