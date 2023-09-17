@@ -6,12 +6,17 @@ import '../styles/styles.css';
 import convertStringToObject from './utils/convertStringToObject';
 import getStateDifference from './utils/getStateDifference';
 import { Zamok } from './zamok';
+import ChangedLogo from '../../public/assets/zamok-basic-1.png';
+import SubmittedLogo from '../../public/assets/zamok-basic-2.png';
 
 const zamok = new Zamok.api({
   topWindowOrigin: 'http://localhost:8081/?zamok=16.2.0',
 });
 
 let initialState = {};
+let initEditor = 0;
+
+const logoElement = document.getElementById('Logo');
 
 // JSON Editor
 const state = EditorState.create({
@@ -19,12 +24,22 @@ const state = EditorState.create({
   type: 'OPEN_GUEST_POPUP',
   payload: ''
 }`,
-  extensions: [basicSetup, EditorState.tabSize.of(2)],
+  extensions: [
+    basicSetup,
+    EditorState.tabSize.of(2),
+    EditorView.updateListener.of(function (e) {
+      initEditor++;
+
+      if (initEditor > 1) {
+        logoElement.src = ChangedLogo;
+      }
+    }),
+  ],
 });
 
 const codeEditor = new EditorView({
   state,
-  parent: document.querySelector('#action-payload'),
+  parent: document.getElementById('action-payload'),
 });
 
 const button = document.getElementById('fire');
@@ -52,22 +67,26 @@ const renderStateTree = (state, parentId) => {
 const dispatch = () => {
   const action = convertStringToObject(codeEditor.state.doc.toString());
 
-  zamok.dispatch(action).then((state) => {
-    const difference = getStateDifference(initialState, state);
-    initialState = state;
+  if (zamok.isInZamok && action) {
+    zamok.dispatch(action).then((state) => {
+      const difference = getStateDifference(initialState, state);
+      initialState = state;
 
-    renderStateTree(initialState, 'json-container');
-    renderStateTree(difference, 'json-container-2');
-  });
+      logoElement.src = SubmittedLogo;
+      renderStateTree(initialState, 'json-container');
+      renderStateTree(difference, 'json-container-2');
+    });
+  } else {
+    alert('Not in zamok');
+  }
 };
 
 button.addEventListener('click', dispatch);
 
-// zamok
-//   .waitForAction('OPEN_GUEST_POPUP')
-//   .then(({ action, state }) => console.log('OPEN_GUEST_POPUP received', state, action)); // TODO replace SOME_ACTION with a valid API Action
-zamok.getState().then((state) => {
-  console.log('latest state from the kiosk:', state);
-  initialState = state;
-  renderStateTree(initialState, 'json-container');
-});
+if (zamok.isInZamok) {
+  zamok.getState().then((state) => {
+    console.log('latest state from the kiosk:', state);
+    initialState = state;
+    renderStateTree(initialState, 'json-container');
+  });
+}
