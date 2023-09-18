@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&display=swap');
+
+body {
+  font-family: 'Public Sans', sans-serif;
+  box-sizing: border-box;
+}
+
+.json-formatter-row {
+  font-family: inherit;
+  font-size: 16px;
+}
+
+/* Custom CodeMirror Styles */
+.cm-editor {
+  background-color: #444654;
+  color: white;
+  font-size: 16px;
+}
+
+.ͼ1 .cm-gutters {
+  background-color: #444654;
+}
+
+.cm-gutter > .cm-gutterElement {
+  background-color: #444654;
+  color: white;
+  font-size: 14px;
+}
