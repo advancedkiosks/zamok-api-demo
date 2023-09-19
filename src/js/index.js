@@ -6,6 +6,8 @@ import '../styles/styles.css';
 import convertStringToObject from './utils/convertStringToObject';
 import getStateDifference from './utils/getStateDifference';
 import { Zamok } from './zamok';
+import LockBg from '../../public/assets/lock.jpg';
+import InitialLogo from '../../public/assets/zamok-basic-0.png';
 import ChangedLogo from '../../public/assets/zamok-basic-1.png';
 import SubmittedLogo from '../../public/assets/zamok-basic-2.png';
 
@@ -16,7 +18,10 @@ const zamok = new Zamok.api({
 let initialState = {};
 let initEditor = 0;
 
+document.getElementsByTagName('body')[0].style.backgroundImage = `url(${LockBg})`;
 const logoElement = document.getElementById('Logo');
+
+logoElement.src = InitialLogo;
 
 // JSON Editor
 const state = EditorState.create({
