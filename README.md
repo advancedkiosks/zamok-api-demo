@@ -20,3 +20,9 @@ Example usage of the Zamok WebView API
 6. Change the URL to `http://localhost:8081/?zamok=16.2.0`.
 7. Save and Apply changes.
 8. Start kiosk.
+
+## Deploying to GitHub Pages
+
+```
+yarn deploy
+```
