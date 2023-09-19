@@ -1,1 +1,37 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Zamok Webview API</title></head><body class="bg-no-repeat bg-cover py-10 px-0 lg:px-10 h-screen w-screen flex flex-col justify-between"><div class="flex justify-between items-center"><h1 class="text-3xl font-bold text-[#232323]">Zamok API Demo</h1><img src="" id="Logo" height="30" width="60"></div><div class="grid grid-cols-3 gap-6 p-10 shadow-lg rounded lg:w-11/12 mx-auto overflow-hidden max-h-[calc(100vh-150px)] bg-white"><div class="space-y-4"><div><label for="action-payload" class="text-lg">ACTION</label><div id="action-payload"></div></div><button id="fire" class="border rounded border-[#232323] p-2 block ml-auto hover:bg-[#232323] hover:text-white transition">RUN ACTION</button></div><div><p class="text-lg">Initial State</p><div class="px-4 text-white text-xl w-full max-h-[calc(100vh-300px)] overflow-y-auto" id="json-container"></div></div><div><p class="text-lg">Difference</p><div class="px-4 text-white text-xl w-full max-h-[calc(100vh-300px)] overflow-y-auto" id="json-container-2"></div></div></div><div class="h-[53px]"></div><script src="https://cdn.tailwindcss.com"></script><script defer="defer" src="/bundle.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zamok Webview API</title>
+</head>
+
+<body class="bg-no-repeat bg-cover py-10 px-0 lg:px-10 h-screen w-screen flex flex-col justify-between">
+  <div class="flex justify-between items-center">
+    <h1 class="text-3xl font-bold text-[#232323]">Zamok API Demo</h1>
+    <img src="" id="Logo" height="30" width="60">
+  </div>
+
+  <div class="grid grid-cols-3 gap-6 p-10 shadow-lg rounded lg:w-11/12 mx-auto overflow-hidden max-h-[calc(100vh-150px)] bg-white">
+    <div class="space-y-4">
+      <div>
+        <label for="action-payload" class="text-lg">ACTION</label>
+        <div id="action-payload"></div>
+      </div>
+      <button id="fire" class="border rounded border-[#232323] p-2 block ml-auto hover:bg-[#232323] hover:text-white transition">RUN ACTION</button>
+    </div>
+    <div>
+      <p class="text-lg">Initial State</p>
+      <div class="px-4 text-white text-xl w-full max-h-[calc(100vh-300px)] overflow-y-auto" id="json-container"></div>
+    </div>
+    <div>
+      <p class="text-lg">Difference</p>
+      <div class="px-4 text-white text-xl w-full max-h-[calc(100vh-300px)] overflow-y-auto" id="json-container-2"></div>
+    </div>
+  </div>
+  <div class="h-[53px]"></div>
+  <script src="https://cdn.tailwindcss.com"></script>
+<script defer src="/bundle.js"></script></body>
+
+</html>
