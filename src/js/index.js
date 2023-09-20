@@ -11,8 +11,13 @@ import InitialLogo from '../../public/assets/zamok-basic-0.png';
 import ChangedLogo from '../../public/assets/zamok-basic-1.png';
 import SubmittedLogo from '../../public/assets/zamok-basic-2.png';
 
+console.log(process.env.NODE_ENV);
+
 const zamok = new Zamok.api({
-  topWindowOrigin: 'http://localhost:8081/?zamok=16.2.0',
+  topWindowOrigin:
+    process.env.NODE_ENV === 'development'
+      ? 'http://localhost:8081/?zamok=16.2.0'
+      : 'https://advancedkiosks.github.io/zamok-api-demo',
 });
 
 let initialState = {};
