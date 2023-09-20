@@ -16,8 +16,8 @@ console.log(process.env.NODE_ENV);
 const zamok = new Zamok.api({
   topWindowOrigin:
     process.env.NODE_ENV === 'development'
-      ? 'http://localhost:8081/?zamok=16.2.0'
-      : 'https://advancedkiosks.github.io/zamok-api-demo/?zamok=16.2.0',
+      ? 'http://localhost:8081/?zamok=16.3.0'
+      : 'https://advancedkiosks.github.io/zamok-api-demo/?zamok=16.3.0',
 });
 
 let initialState = {};
