@@ -16,6 +16,7 @@ const zamok = new Zamok.api({
 });
 
 let initialState = {};
+let difference = {};
 let initEditor = 0;
 
 document.getElementsByTagName('body')[0].style.backgroundImage = `url(${LockBg})`;
@@ -48,6 +49,8 @@ const codeEditor = new EditorView({
 });
 
 const button = document.getElementById('fire');
+const copyButton = document.getElementById('copy');
+const copyDifferenceButton = document.getElementById('copy-difference');
 
 const renderStateTree = (state, parentId) => {
   const parent = document.getElementById(parentId);
@@ -74,7 +77,7 @@ const dispatch = () => {
 
   if (zamok.isInZamok && action) {
     zamok.dispatch(action).then((state) => {
-      const difference = getStateDifference(initialState, state);
+      difference = getStateDifference(initialState, state);
       initialState = state;
 
       logoElement.src = SubmittedLogo;
@@ -86,7 +89,13 @@ const dispatch = () => {
   }
 };
 
+const copyToClipboard = (obj) => {
+  navigator.clipboard.writeText(JSON.stringify(obj));
+};
+
 button.addEventListener('click', dispatch);
+copyButton.addEventListener('click', () => copyToClipboard(initialState));
+copyDifferenceButton.addEventListener('click', () => copyToClipboard(difference));
 
 if (zamok.isInZamok) {
   zamok.getState().then((state) => {

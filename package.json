@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "repository": "github:advancedkiosks/zamok-api-demo",
-	"homepage": "https://advancedkiosks.github.io/zamok-api-demo",
+  "homepage": "https://advancedkiosks.github.io/zamok-api-demo",
   "scripts": {
     "start": "webpack serve --mode development --open",
-    "build": "webpack --mode=development",
+    "build": "webpack --mode production",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
