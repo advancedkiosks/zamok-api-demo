@@ -13,8 +13,13 @@ import SubmittedLogo from '../../public/assets/zamok-basic-2.png';
 
 // ONE ERROR IN THIS SCRIPT CAUSES THE WHOLE UI TO BREAK.
 
+console.log(process.env.NODE_ENV);
+
 const zamok = new Zamok.api({
-  topWindowOrigin: 'https://advancedkiosks.github.io',
+  topWindowOrigin:
+    process.env.NODE_ENV === 'development'
+      ? 'http://localhost:8081/'
+      : 'https://advancedkiosks.github.io/zamok-api-demo/',
 });
 
 console.log('[zamok-api-demo]', { zamok });
