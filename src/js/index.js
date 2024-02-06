@@ -11,9 +11,13 @@ import InitialLogo from '../../public/assets/zamok-basic-0.png';
 import ChangedLogo from '../../public/assets/zamok-basic-1.png';
 import SubmittedLogo from '../../public/assets/zamok-basic-2.png';
 
+// ONE ERROR IN THIS SCRIPT CAUSES THE WHOLE UI TO BREAK.
+
 const zamok = new Zamok.api({
-  topWindowOrigin: 'http://localhost:8081/?zamok=16.2.0',
+  topWindowOrigin: 'https://advancedkiosks.github.io',
 });
+
+console.log('[zamok-api-demo]', { zamok });
 
 let initialState = {};
 let initEditor = 0;
@@ -26,8 +30,7 @@ logoElement.src = InitialLogo;
 // JSON Editor
 const state = EditorState.create({
   doc: `{
-  type: 'OPEN_GUEST_POPUP',
-  payload: ''
+  type: 'SESSION_RESET'
 }`,
   extensions: [
     basicSetup,
@@ -72,26 +75,30 @@ const renderStateTree = (state, parentId) => {
 const dispatch = () => {
   const action = convertStringToObject(codeEditor.state.doc.toString());
 
-  if (zamok.isInZamok && action) {
-    zamok.dispatch(action).then((state) => {
-      const difference = getStateDifference(initialState, state);
-      initialState = state;
+  console.log('Dispatching action to Zamok...');
 
-      logoElement.src = SubmittedLogo;
-      renderStateTree(initialState, 'json-container');
-      renderStateTree(difference, 'json-container-2');
-    });
+  if (zamok) {
+    zamok
+      .dispatch(action)
+      .catch((e) => console.error(e))
+      .then((state) => {
+        const difference = getStateDifference(initialState, state);
+        initialState = state;
+
+        logoElement.src = SubmittedLogo;
+        renderStateTree(initialState, 'json-container');
+        renderStateTree(difference, 'json-container-2');
+      })
+      .finally(() => console.log('dispatch promise finished'));
   } else {
-    alert('Not in zamok');
+    console.warn('Not in zamok');
   }
 };
 
 button.addEventListener('click', dispatch);
 
-if (zamok.isInZamok) {
-  zamok.getState().then((state) => {
-    console.log('latest state from the kiosk:', state);
-    initialState = state;
-    renderStateTree(initialState, 'json-container');
-  });
-}
+zamok.getState().then((state) => {
+  console.log('latest state from the kiosk:', state);
+  initialState = state;
+  renderStateTree(initialState, 'json-container');
+});
