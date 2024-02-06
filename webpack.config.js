@@ -1,12 +1,12 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = {
+module.exports = (_, argv) => ({
   entry: './src/js/index.js', // Your entry point
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/',
+    publicPath: argv.mode === 'production' ? '/zamok-api-demo/' : '/',
   },
   module: {
     rules: [
@@ -37,4 +37,4 @@ module.exports = {
   devServer: {
     port: 8081,
   },
-};
+});

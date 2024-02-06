@@ -25,6 +25,7 @@ const zamok = new Zamok.api({
 console.log('[zamok-api-demo]', { zamok });
 
 let initialState = {};
+let difference = {};
 let initEditor = 0;
 
 document.getElementsByTagName('body')[0].style.backgroundImage = `url(${LockBg})`;
@@ -56,6 +57,8 @@ const codeEditor = new EditorView({
 });
 
 const button = document.getElementById('fire');
+const copyButton = document.getElementById('copy');
+const copyDifferenceButton = document.getElementById('copy-difference');
 
 const renderStateTree = (state, parentId) => {
   const parent = document.getElementById(parentId);
@@ -100,7 +103,13 @@ const dispatch = () => {
   }
 };
 
+const copyToClipboard = (obj) => {
+  navigator.clipboard.writeText(JSON.stringify(obj));
+};
+
 button.addEventListener('click', dispatch);
+copyButton.addEventListener('click', () => copyToClipboard(initialState));
+copyDifferenceButton.addEventListener('click', () => copyToClipboard(difference));
 
 zamok.getState().then((state) => {
   console.log('latest state from the kiosk:', state);
