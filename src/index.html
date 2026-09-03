@@ -1,65 +1,924 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zamok API Console</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap"
+    />
+    <style>
+      html,
+      body,
+      #root {
+        height: 100%;
+        margin: 0;
+      }
+      body {
+        font-family: Roboto, sans-serif;
+      }
+      /* react-json-tree renders its own inline styles; this just keeps long strings sane */
+      #root pre {
+        margin: 0;
+      }
+    </style>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zamok Webview API</title>
-</head>
+    <!-- THIS DOCUMENT WAS CREATED BY AI AGENT -->
+    <!-- It would be better if the Redux Action Registry was compiled at yarn build time -->
+    <!-- The action registry is currently hardcoded for development purposes -->
 
-<body class="bg-no-repeat bg-cover py-10 px-0 lg:px-10 h-screen w-screen flex flex-col justify-between">
-  <div class="flex justify-between items-center">
-    <h1 class="text-3xl font-bold text-[#232323]">Zamok API Demo</h1>
-    <img src="" id="Logo" height="30" width="60">
-  </div>
+    <!--
+    This page uses browser-native ES Modules (no bundler) via an import map, resolved
+    through esm.sh. Babel Standalone below transpiles the inline JSX and hands the
+    result to the browser's module loader (see the `data-type="module"` script tag).
+  -->
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@18",
+          "react-dom": "https://esm.sh/react-dom@18",
+          "react-dom/client": "https://esm.sh/react-dom@18/client",
+          "react/jsx-runtime": "https://esm.sh/react@18/jsx-runtime",
+          "@mui/material": "https://esm.sh/@mui/material@6?external=react,react-dom",
+          "@mui/material/": "https://esm.sh/@mui/material@6&external=react,react-dom/",
+          "react-json-tree": "https://esm.sh/react-json-tree@0.19.0?external=react,react-dom"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
 
-  <div class="grid grid-cols-3 gap-6 p-10 shadow-lg rounded lg:w-11/12 mx-auto overflow-hidden max-h-[calc(100vh-150px)] bg-white">
-    <div class="space-y-4">
-      <div>
-        <label for="action-payload" class="text-lg">ACTION</label>
-        <div id="action-payload"></div>
-      </div>
-      <button id="fire" class="border rounded border-[#232323] p-2 block ml-auto hover:bg-[#232323] hover:text-white transition">RUN ACTION</button>
-    </div>
-    <div>
-      <div class="flex items-center justify-between">
-        <p class="text-lg">State</p>
-        <button id="copy" class="h-5 w-5">
-          <svg fill="#000000" height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 330 330" xml:space="preserve">
-            <g>
-              <path d="M35,270h45v45c0,8.284,6.716,15,15,15h200c8.284,0,15-6.716,15-15V75c0-8.284-6.716-15-15-15h-45V15
-                c0-8.284-6.716-15-15-15H35c-8.284,0-15,6.716-15,15v240C20,263.284,26.716,270,35,270z M280,300H110V90h170V300z M50,30h170v30H95
-                c-8.284,0-15,6.716-15,15v165H50V30z" />
-              <path d="M155,120c-8.284,0-15,6.716-15,15s6.716,15,15,15h80c8.284,0,15-6.716,15-15s-6.716-15-15-15H155z" />
-              <path d="M235,180h-80c-8.284,0-15,6.716-15,15s6.716,15,15,15h80c8.284,0,15-6.716,15-15S243.284,180,235,180z" />
-              <path d="M235,240h-80c-8.284,0-15,6.716-15,15c0,8.284,6.716,15,15,15h80c8.284,0,15-6.716,15-15C250,246.716,243.284,240,235,240z" />
-            </g>
-          </svg>
-        </button>
-      </div>
-      <div class="px-4 text-white text-xl w-full max-h-[calc(100vh-300px)] overflow-y-auto" id="json-container"></div>
-    </div>
-    <div>
-      <div class="flex items-center justify-between">
-        <p class="text-lg">Difference</p>
-        <button id="copy-difference" class="h-5 w-5">
-          <svg fill="#000000" height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 330 330" xml:space="preserve">
-            <g>
-              <path d="M35,270h45v45c0,8.284,6.716,15,15,15h200c8.284,0,15-6.716,15-15V75c0-8.284-6.716-15-15-15h-45V15
-              c0-8.284-6.716-15-15-15H35c-8.284,0-15,6.716-15,15v240C20,263.284,26.716,270,35,270z M280,300H110V90h170V300z M50,30h170v30H95
-              c-8.284,0-15,6.716-15,15v165H50V30z" />
-              <path d="M155,120c-8.284,0-15,6.716-15,15s6.716,15,15,15h80c8.284,0,15-6.716,15-15s-6.716-15-15-15H155z" />
-              <path d="M235,180h-80c-8.284,0-15,6.716-15,15s6.716,15,15,15h80c8.284,0,15-6.716,15-15S243.284,180,235,180z" />
-              <path d="M235,240h-80c-8.284,0-15,6.716-15,15c0,8.284,6.716,15,15,15h80c8.284,0,15-6.716,15-15C250,246.716,243.284,240,235,240z" />
-            </g>
-          </svg>
-        </button>
-      </div>
-      <div class="px-4 text-white text-xl w-full max-h-[calc(100vh-300px)] overflow-y-auto" id="json-container-2"></div>
-    </div>
-  </div>
-  <div class="h-[53px]"></div>
-  <script src="https://cdn.tailwindcss.com"></script>
-</body>
+    <!--
+    zamok.js is expected to sit alongside this file (both land in dist/ from `yarn build`,
+    and both get deployed together). It defines the global `Zamok` object synchronously,
+    so it must be loaded as a classic (non-module) script before our module script below.
+  -->
+    <script src="zamok.js"></script>
 
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel" data-type="module">
+      import React, { useEffect, useRef, useState } from "react";
+      import { createRoot } from "react-dom/client";
+      import {
+        Alert,
+        AppBar,
+        Autocomplete,
+        Box,
+        Button,
+        Chip,
+        CssBaseline,
+        Tab,
+        Tabs,
+        TextField,
+        ThemeProvider,
+        Toolbar,
+        Tooltip,
+        Typography,
+        createTheme,
+      } from "@mui/material";
+      import { JSONTree } from "react-json-tree";
+
+      // ---------------------------------------------------------------------------
+      // Action registry
+      //
+      // Grouped by module, sorted by module then alphabetically. Mirrors the shape
+      // of this repo's `actionsPayloadExample` convention (see any package's
+      // `actions-payload-example.ts`): { type: 'string' | 'number' | 'boolean' | 'object', fields?: {...} }
+      // Hardcoded here since this is a standalone dev-tool page with no build step.
+      // ---------------------------------------------------------------------------
+      const ACTIONS_REGISTRY = {
+        "mc-video": {
+          VIDEO_SET_DEFAULT_WEBCAM: { type: "string" },
+          VIDEO_SWITCH_WEBCAM: { type: "string" },
+          SET_KIOSK_ACTIVE_WEBCAM: { type: "string" },
+          SET_CAMERA_AVAILABILITY: { type: "boolean" },
+          VIDEO_UPDATE_CAMERA_STATUS: { type: "boolean" },
+          VIDEO_UPDATE_MIC_STATUS: { type: "boolean" },
+          VIDEO_UPDATE_SCREEN_SHARE_STATUS: { type: "boolean" },
+          VIDEO_UPDATE_PARTICIPANT_SCREEN_SHARE_STATUS: { type: "boolean" },
+          VIDEO_UPDATE_IS_IN_CALL: { type: "boolean" },
+          PERMISSIONS_GRANTED: { type: "boolean" },
+          EXECUTE_PT_COMMAND: { type: "object", fields: { command: "string" } },
+          EXECUTE_ZOOM_COMMAND: {
+            type: "object",
+            fields: { command: "string" },
+          },
+        },
+        "module-ai-chatbot": {
+          "AI_CHATBOT/SEND_MODEL_MESSAGE": { type: "string" },
+          "AI_CHATBOT/SET_INACTIVITY_STATUS": { type: "string" },
+          "AI_CHATBOT/SET_LOADING": { type: "boolean" },
+          "AI_CHATBOT/SET_RECEIVING_RESPONSE": { type: "boolean" },
+          "AI_CHATBOT/SET_OUTPUT_MUTED": { type: "boolean" },
+          "AI_CHATBOT/SET_AUDIO_OUTPUT_ENABLED": { type: "boolean" },
+          "AI_CHATBOT/SET_AUDIO_PLAYING": { type: "boolean" },
+          "AI_CHATBOT/UPDATE_USER_MESSAGE": {
+            type: "object",
+            fields: { messageId: "string", text: "string" },
+          },
+        },
+        "module-ai-gemini": {
+          "AI_GEMINI/SET_LOADING": { type: "boolean" },
+          "AI_GEMINI/SEND_LIVE_MESSAGE": { type: "string" },
+          "AI_GEMINI/SET_WEBVIEW_SUMMARY": {
+            type: "object",
+            fields: { markdown: "string" },
+          },
+          "AI_GEMINI/SEND_PAGE_CONTENT": {
+            type: "object",
+            fields: { reason: "string", functionId: "string" },
+          },
+          "AI_GEMINI/END_CHAT_SESSION": {
+            type: "object",
+            fields: { functionId: "string" },
+          },
+          "AI_GEMINI/MUTE_VOICE_INPUT": {
+            type: "object",
+            fields: { functionId: "string", reason: "string" },
+          },
+          "AI_GEMINI/UPDATE_TOKEN_COUNT": {
+            type: "object",
+            fields: {
+              inputTokens: "number",
+              outputTokens: "number",
+              turnTotalTokens: "number",
+            },
+          },
+        },
+        "module-cash-recycler": {
+          CASHR_TRANSACTION_CREDIT: { type: "number" },
+          CASHR_TRANSACTION_DEBIT: { type: "number" },
+          CASHR_ERROR: { type: "object", fields: { message: "string" } },
+          CASHR_STATUS_CHANGE: { type: "object", fields: { status: "string" } },
+          CASHR_TRANSACTION_CHANGE_OWED: {
+            type: "object",
+            fields: { amount: "number", deviceWillDispenseChange: "boolean" },
+          },
+          CASHR_START_TRANSACTION: {
+            type: "object",
+            fields: { salePrice: "number", transactionId: "string" },
+          },
+          CASHR_CANCEL_TRANSACTION: {
+            type: "object",
+            fields: { reason: "string" },
+          },
+          CASHR_ON_TRANSACTION_END: {
+            type: "object",
+            fields: { transactionId: "string", exitCode: "string" },
+          },
+        },
+        "module-chat": { UPDATE_CHAT_MESSAGE: { type: "string" } },
+        "module-common-accessibility": {
+          SET_SPEECH_SYNTH_ACTIVE: { type: "boolean" },
+          SET_SPEECH_SYNTH_IN_PROGRESS: { type: "boolean" },
+          SET_SPEECH_SYNTH_PAUSED: { type: "boolean" },
+          SET_SPEECH_SYNTH_RATE_CHANGE_IN_PROGRESS: { type: "boolean" },
+          SET_SPEECH_SYNTH_RATE: { type: "number" },
+        },
+        "module-common-assets": {
+          DOWNLOAD_ASSET: { type: "string" },
+          ASSET_DOWNLOADED: {
+            type: "object",
+            fields: { downloadUrl: "string", localPath: "string" },
+          },
+        },
+        "module-common-contacts": { INSTANCE_DELETE_GROUP: { type: "string" } },
+        "module-common-kiosks": {
+          PROCEED_CONFIRM_RESET: { type: "string" },
+          DELETE_OVERRIDE: {
+            type: "object",
+            fields: { kioskId: "string", solutionId: "string" },
+          },
+          LOAD_KIOSK_ID: { type: "string" },
+          CHOOSE_KIOSK_ID: { type: "string" },
+          LOAD_TEAMVIEWER_ID: { type: "string" },
+          LOAD_SERIAL_NO: { type: "string" },
+        },
+        "module-common-logs": {
+          LOGS_PAGINATE_GO_NEXT: { type: "object", fields: { key: "string" } },
+          LOGS_PAGINATE_GO_PREV: { type: "object", fields: { key: "string" } },
+        },
+        "module-common-remoteactions": {
+          REMOVE_REMOTE_ACTION_FROM_QUEUE: { type: "string" },
+          CREATE_REMOTE_ACTION: {
+            type: "object",
+            fields: { to: "string", shell: "string" },
+          },
+        },
+        "module-common-session": {
+          SESSION_RESET: { type: "none" },
+          SESSION_MAX_LENGTH_TIMER_COUNTDOWN: { type: "number" },
+          SHOW_SPLASH_SCREEN: { type: "boolean" },
+          ACCEPT_SPLASH_SCREEN: { type: "boolean" },
+          OPEN_TIMER_COUNTDOWN_DIALOG: {
+            type: "object",
+            fields: { timerCountdown: "number", type: "string" },
+          },
+          COUNTDOWN_FINISHED: { type: "object", fields: { type: "string" } },
+        },
+        "module-common-translations": {
+          SET_CURRENT_LANGUAGE: { type: "string" },
+          SET_TRANSLATION_IN_PROGRESS: { type: "boolean" },
+          SET_SHOW_LANGUAGE_PICKER_MODAL: { type: "boolean" },
+          TRANSLATE_ALL_SETTINGS: {
+            type: "object",
+            fields: { instanceId: "string" },
+          },
+        },
+        "module-core-auth": {
+          SET_DELEGATE_UID: { type: "string" },
+          MANAGE_ACCOUNT: { type: "string" },
+          AUTH_EXPIRE: { type: "string" },
+          SET_AUTH_DOMAINS: {
+            type: "object",
+            fields: { name: "string", ttl: "number" },
+          },
+          AUTH_INIT: {
+            type: "object",
+            fields: { env: "string", token: "string" },
+          },
+        },
+        "module-core-messages": { REMOVE_SNACKBAR: { type: "string" } },
+        "module-core-outofservice": { SET_ONLINE_STATUS: { type: "boolean" } },
+        "module-directory-voip": {
+          START_VOIP_DIRECTORY_CALL: {
+            type: "object",
+            fields: { name: "string", phoneNo: "string", delay: "number" },
+          },
+        },
+        "module-document-popup": {
+          CLOSE_DOCUMENT_POPUP: {
+            type: "object",
+            fields: { numOfPages: "number" },
+          },
+          SET_DOCUMENTS_SCANNED: {
+            type: "object",
+            fields: { fileName: "string", applicationType: "string" },
+          },
+        },
+        "module-facelock": {
+          OPEN_FACE_LOCK_SPLASH_SCREEN: { type: "boolean" },
+          TOGGLE_FACE_LOCK: { type: "boolean" },
+          ACCEPT_FACE_LOCK_SPLASH_SCREEN: { type: "boolean" },
+        },
+        "module-facial-recognition": {
+          TOGGLE_FACE_DETECTION: { type: "boolean" },
+          SHOW_MEDIAPIPE_PREVIEW: {
+            type: "object",
+            fields: { open: "boolean", mode: "string" },
+          },
+        },
+        "module-guest-popup": {
+          SET_PHOTO_IMAGE: { type: "string" },
+          CLOSE_PHOTO_POPUP: { type: "string" },
+        },
+        "module-homepage": {
+          OPEN_HOMEPAGE_WEBVIEW: { type: "string" },
+          UPDATE_HOMEPAGE_LANGUAGE: { type: "string" },
+          UPDATE_CURRENT_KIOSK: { type: "string" },
+          SET_BUTTON_COLS: { type: "number" },
+          SET_BUTTON_ROWS: { type: "number" },
+          UPDATE_KIOSK_TYPE: { type: "number" },
+          ADD_COL_ROW_BUTTONS: { type: "number" },
+          DELETE_COL_ROW_BUTTONS: { type: "number" },
+          UPDATE_BUTTON_FACE_LOCK: { type: "boolean" },
+          SET_BUTTON_LAYOUT: {
+            type: "object",
+            fields: { columns: "number", rows: "number" },
+          },
+          UPDATE_IMG: {
+            type: "object",
+            fields: { img: "string", index: "number" },
+          },
+        },
+        "module-instructional-popup": {
+          ZLP_CONFIRM_DIALOG_RESPONSE: { type: "boolean" },
+          OPEN_INSTRUCTIONAL_POPUP: {
+            type: "object",
+            fields: { action: "string", payload: "string" },
+          },
+        },
+        "module-lobby-attendant": {
+          START_CALL_WORKFLOW: {
+            type: "object",
+            fields: { phoneNumber: "string", name: "string" },
+          },
+        },
+        "module-message-twilio": {
+          UPDATE_TEXT_MESSAGE: { type: "string" },
+          SEND_TEXT_MESSAGE_TWILIO: {
+            type: "object",
+            fields: {
+              phoneNumber: "string",
+              message: "string",
+              mediaUrl: "string",
+            },
+          },
+          OPEN_SEND_TEXT_MESSAGE_FORM: {
+            type: "object",
+            fields: { phoneNo: "string", name: "string" },
+          },
+        },
+        "module-microcontroller": { WEBSOCKET_CONNECTED: { type: "boolean" } },
+        "module-modal-videoplayer": {
+          PLAY_VIDEO: { type: "boolean" },
+          SET_WAIT_REPLAY_DELAY: { type: "boolean" },
+        },
+        "module-modal-voip": { MINIMIZE_VOIP_MODAL: { type: "boolean" } },
+        "module-modal-warning": { UPDATE_WARNING_MESSAGE: { type: "string" } },
+        "module-onscreen-keyboard": {
+          SHOW_ZAMOK_KEYBOARD: { type: "string" },
+          UPDATE_KEYBOARD_VALUE: { type: "string" },
+          SET_WEBVIEW_INPUT_TYPE: { type: "string" },
+          UPDATE_ON_SCREEN_KEYBOARD_MODE: { type: "string" },
+        },
+        "module-payments": {
+          START_TRANSACTION: {
+            type: "object",
+            fields: {
+              total: "number",
+              paymentMethodAckId: "string (optional)",
+              customerAckId: "string (optional)",
+              externalID: "string (optional)",
+            },
+          },
+          CANCEL_TRANSACTION: { type: "object", fields: { reason: "string" } },
+          REFUND_OWED: { type: "object", fields: { amount: "number" } },
+          REFUND_ISSUED: { type: "object", fields: { amount: "number" } },
+          SET_TRANSACTION_PAYMENT_METHOD_ACK_ID: {
+            type: "object",
+            fields: { paymentMethodAckId: "string" },
+          },
+          SET_TRANSACTION_EXTERNAL_ID: {
+            type: "object",
+            fields: { externalId: "string" },
+          },
+          SET_TRANSACTION_CUSTOMER_ACK_ID: {
+            type: "object",
+            fields: { customerAckId: "string" },
+          },
+        },
+        "module-phidget-boolean": {
+          PHIDGET_CLICK: { type: "string" },
+          SET_PHIDGET_BOOLEAN: {
+            type: "object",
+            fields: { id: "string", isClosed: "boolean" },
+          },
+        },
+        "module-printing": {
+          UPDATE_IS_OUT_OF_PAPER: { type: "boolean" },
+          UPDATE_IS_PRINTING: { type: "boolean" },
+          REMOVE_PRINT_JOB: { type: "string" },
+          ADD_PRINT_JOB: {
+            type: "object",
+            fields: { file: "string", type: "string", name: "string" },
+          },
+        },
+        "module-queue": {
+          PUT_ME_IN_THE_QUEUE: { type: "object", fields: { source: "string" } },
+          ACCEPT_QUEUE_ASSIGNMENT: {
+            type: "object",
+            fields: { kioskId: "string" },
+          },
+          REJECT_QUEUE_ASSIGNMENT: {
+            type: "object",
+            fields: { agentId: "string", kioskId: "string" },
+          },
+          REMOVE_FROM_THE_QUEUE: {
+            type: "object",
+            fields: { kioskId: "string" },
+          },
+        },
+        "module-scanning": {
+          TWAIN_AVAILABLE: { type: "boolean" },
+          UPDATE_CURRENT_SCAN_JOB: { type: "string" },
+          UPDATE_SCAN_ROTATION: {
+            type: "object",
+            fields: { id: "string", degrees: "number" },
+          },
+          SCANNER_ENABLED: { type: "boolean" },
+          SCAN_RECEIVED: { type: "string" },
+        },
+        "module-screenreader": {
+          SR_SYNC_SPEECHMODE: { type: "boolean" },
+          SR_INIT_TIMEOUT: { type: "boolean" },
+          SR_TOGGLE: { type: "string" },
+        },
+        "module-sidebar-feedback": {
+          SHOW_SIDEBAR_FEEDBACK: { type: "boolean" },
+          SHOW_FEEDBACK_MODAL: { type: "boolean" },
+          SET_FEEDBACK: { type: "string" },
+        },
+        "module-storage": {
+          STORAGE_DELETE: { type: "string" },
+          STORAGE_UPDATE: {
+            type: "object",
+            fields: {
+              storagePath: "string",
+              fileName: "string",
+              altText: "string",
+              description: "string",
+            },
+          },
+          STORAGE_COPY: {
+            type: "object",
+            fields: {
+              sourceId: "string",
+              destinationId: "string",
+              fileName: "string",
+            },
+          },
+        },
+        "module-survey": {
+          RESET_SURVEY: { type: "string" },
+          SET_CURRENT_SURVEY_PAGE: { type: "string" },
+          SET_SURVEY_SUBMITTING: {
+            type: "object",
+            fields: { surveyId: "string", isSubmitting: "boolean" },
+          },
+        },
+        "module-tabs": {
+          TAB_GO_BACK: { type: "string" },
+          TAB_REFRESH: { type: "string" },
+          TAB_SET_ACTIVE: { type: "number" },
+          DISABLE_WEBVIEW_TRANSLATIONS: { type: "boolean" },
+          REMOVE_TAB_MODULES: { type: "object", fields: { modules: "string" } },
+          TAB_SET_TITLE: {
+            type: "object",
+            fields: { tabId: "string", title: "string" },
+          },
+          TAB_SET_INIT: { type: "object", fields: { url: "string" } },
+          TAB_SET_HOME_PAGE: {
+            type: "object",
+            fields: { moduleName: "string", url: "string" },
+          },
+          TAB_SET_CONTENT_LOADED: {
+            type: "object",
+            fields: { moduleName: "string" },
+          },
+        },
+        "module-voip-twilio": {
+          VOIP_DIAL_NUMBER: { type: "string" },
+          TOGGLE_VOIP_CONTACTS_PICKER: { type: "boolean" },
+          START_VOIP_CALL: {
+            type: "object",
+            fields: { name: "string", phoneNo: "string", delay: "number" },
+          },
+        },
+        "module-volume-control": {
+          SET_MIC_VOLUME: { type: "number" },
+          SET_VOLUME: { type: "number" },
+          SET_GROUP_VOLUME: {
+            type: "object",
+            fields: { audioOutputGroup: "string", volume: "number" },
+          },
+          GROUP_VOLUME_UP: {
+            type: "object",
+            fields: { audioOutputGroup: "string" },
+          },
+          GROUP_VOLUME_DOWN: {
+            type: "object",
+            fields: { audioOutputGroup: "string" },
+          },
+        },
+        "module-webfilter-navigation": {
+          WEBFILTER_NAVIGATION_BLOCK: { type: "string" },
+        },
+        "module-webfilter": { WEBFILTER_BLOCK: { type: "string" } },
+        "module-webview-workflows": {
+          WEBVIEW_WORKFLOW_TRIGGER: {
+            type: "object",
+            fields: { type: "string" },
+          },
+        },
+      };
+
+      // ---------------------------------------------------------------------------
+      // Helpers
+      // ---------------------------------------------------------------------------
+
+      // Turns a package folder name (e.g. "module-common-session", "mc-video") into a
+      // human-friendly, title-cased module label (e.g. "Common Session", "Video").
+      function moduleLabel(moduleKey) {
+        const words = moduleKey
+          .replace(/^module-/, "")
+          .replace(/^mc-/, "")
+          .split("-");
+        return words
+          .map((word) =>
+            word.toLowerCase() === "ai"
+              ? "AI"
+              : word.charAt(0).toUpperCase() + word.slice(1),
+          )
+          .join(" ");
+      }
+
+      const ACTION_OPTIONS = Object.entries(ACTIONS_REGISTRY)
+        .flatMap(([moduleKey, actions]) =>
+          Object.entries(actions).map(([type, schema]) => ({
+            type,
+            moduleKey,
+            moduleLabel: moduleLabel(moduleKey),
+            schema,
+          })),
+        )
+        .sort(
+          (a, b) =>
+            a.moduleLabel.localeCompare(b.moduleLabel) ||
+            a.type.localeCompare(b.type),
+        );
+
+      // Converts a schema field type (e.g. "string", "number (optional)") into a
+      // representative placeholder value for the recommended payload.
+      function exampleValueForType(fieldType) {
+        switch ((fieldType || "").replace(" (optional)", "")) {
+          case "string":
+            return "";
+          case "number":
+            return 0;
+          case "boolean":
+            return true;
+          default:
+            return null;
+        }
+      }
+
+      // Builds a recommended payload from a registry schema. Returns `undefined`
+      // when the action takes no payload at all.
+      function buildExamplePayload(schema) {
+        if (!schema || schema.type === "none") return undefined;
+        if (schema.type === "object") {
+          const obj = {};
+          Object.entries(schema.fields || {}).forEach(([field, fieldType]) => {
+            obj[field] = exampleValueForType(fieldType);
+          });
+          return obj;
+        }
+        return exampleValueForType(schema.type);
+      }
+
+      // ---------------------------------------------------------------------------
+      // Theme
+      // ---------------------------------------------------------------------------
+      const theme = createTheme({
+        palette: {
+          mode: "dark",
+          background: { default: "#121212", paper: "#1a1a1a" },
+        },
+        typography: {
+          fontFamily: "Roboto, sans-serif",
+        },
+        components: {
+          MuiButtonBase: { defaultProps: { disableRipple: true } },
+        },
+      });
+
+      const jsonTreeTheme = {
+        scheme: "monokai",
+        author: "wimer hazenberg (http://www.monokai.nl)",
+        base00: "transparent",
+        base01: "#383830",
+        base02: "#49483e",
+        base03: "#75715e",
+        base04: "#a59f85",
+        base05: "#f8f8f2",
+        base06: "#f5f4f1",
+        base07: "#f9f8f5",
+        base08: "#f92672",
+        base09: "#fd971f",
+        base0A: "#f4bf75",
+        base0B: "#a6e22e",
+        base0C: "#a1efe4",
+        base0D: "#66d9ef",
+        base0E: "#ae81ff",
+        base0F: "#cc6633",
+      };
+
+      // ---------------------------------------------------------------------------
+      // App
+      // ---------------------------------------------------------------------------
+      function StatusChip({ status }) {
+        const map = {
+          connecting: { color: "#9e9e9e", label: "Connecting…" },
+          connected: { color: "#4caf50", label: "Connected" },
+          error: { color: "#f44336", label: "Disconnected" },
+          missing: { color: "#f44336", label: "zamok.js not found" },
+        };
+        const { color, label } = map[status] || map.connecting;
+        return (
+          <Chip
+            size="small"
+            variant="outlined"
+            label={label}
+            icon={
+              <Box
+                component="span"
+                sx={{
+                  width: 8,
+                  height: 8,
+                  borderRadius: "50%",
+                  bgcolor: color,
+                  display: "inline-block",
+                  ml: "10px",
+                }}
+              />
+            }
+          />
+        );
+      }
+
+      function App() {
+        const zamokRef = useRef(null);
+        const [connectionStatus, setConnectionStatus] = useState("connecting");
+        const [state, setState] = useState(null);
+        const [lastAction, setLastAction] = useState(null);
+        const [tab, setTab] = useState(0);
+        const [selectedType, setSelectedType] = useState("");
+        const [payloadText, setPayloadText] = useState("");
+        const [dispatchError, setDispatchError] = useState(null);
+
+        useEffect(() => {
+          if (!window.Zamok) {
+            setConnectionStatus("missing");
+            return;
+          }
+
+          // Standard connect flow per the shell-api README: construct the client,
+          // then wait for `.ready` before doing anything else with it.
+          const zamok = window.Zamok.api();
+          zamokRef.current = zamok;
+
+          zamok.ready
+            .then(() => {
+              setConnectionStatus("connected");
+
+              zamok.getState().then((initialState) => setState(initialState));
+
+              zamok.data$.subscribe(({ state: nextState, action }) => {
+                setLastAction(action);
+                setState((prevState) => {
+                  // Skip redundant re-renders when the state hasn't actually changed.
+                  if (
+                    prevState &&
+                    JSON.stringify(prevState) === JSON.stringify(nextState)
+                  ) {
+                    return prevState;
+                  }
+                  return nextState;
+                });
+              });
+            })
+            .catch(() => setConnectionStatus("error"));
+        }, []);
+
+        const handleActionChange = (event, newValue) => {
+          if (newValue && typeof newValue !== "string") {
+            const example = buildExamplePayload(newValue.schema);
+            setPayloadText(
+              example === undefined ? "" : JSON.stringify(example, null, 2),
+            );
+            setDispatchError(null);
+          }
+        };
+
+        const handleFire = () => {
+          const type = selectedType.trim();
+          if (!type) {
+            setDispatchError("Choose or type an action type first.");
+            return;
+          }
+
+          let payload;
+          if (payloadText.trim()) {
+            try {
+              payload = JSON.parse(payloadText);
+            } catch (e) {
+              setDispatchError("Payload is not valid JSON: " + e.message);
+              return;
+            }
+          }
+
+          setDispatchError(null);
+          const action = payload !== undefined ? { type, payload } : { type };
+
+          // We only care about dispatch errors here — the resulting state update
+          // will arrive on its own through the data$ subscription above.
+          zamokRef.current
+            .dispatch(action)
+            .catch((e) => setDispatchError(String((e && e.message) || e)));
+        };
+
+        const isConnected = connectionStatus === "connected";
+
+        return (
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Box
+              sx={{ display: "flex", flexDirection: "column", height: "100vh" }}
+            >
+              <AppBar
+                position="static"
+                color="transparent"
+                elevation={0}
+                sx={{ borderBottom: 1, borderColor: "divider" }}
+              >
+                <Toolbar variant="dense" sx={{ gap: 1.5 }}>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{ fontWeight: 700, flexShrink: 0 }}
+                  >
+                    Zamok API Console
+                  </Typography>
+                  <Box sx={{ flexGrow: 1 }} />
+                  <Tooltip title="This page's origin — must be allowed in Zamok Dashboard > Settings > Webview > API Origins">
+                    <Chip
+                      size="small"
+                      variant="outlined"
+                      label={"origin: " + window.location.origin}
+                      sx={{ fontFamily: "Roboto Mono, monospace" }}
+                    />
+                  </Tooltip>
+                  <StatusChip status={connectionStatus} />
+                </Toolbar>
+              </AppBar>
+
+              <Box
+                sx={{
+                  flex: "1 1 50%",
+                  minHeight: 0,
+                  display: "flex",
+                  flexDirection: "column",
+                  borderBottom: 1,
+                  borderColor: "divider",
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 1,
+                    px: 2,
+                    py: 1,
+                  }}
+                >
+                  <Typography variant="overline" sx={{ letterSpacing: 1 }}>
+                    State
+                  </Typography>
+                  {lastAction && (
+                    <Chip
+                      size="small"
+                      variant="outlined"
+                      label={"last action: " + lastAction.type}
+                      sx={{ fontFamily: "Roboto Mono, monospace" }}
+                    />
+                  )}
+                  <Box sx={{ flexGrow: 1 }} />
+                  <Button
+                    size="small"
+                    disabled={!state}
+                    onClick={() =>
+                      navigator.clipboard.writeText(
+                        JSON.stringify(state, null, 2),
+                      )
+                    }
+                  >
+                    Copy JSON
+                  </Button>
+                </Box>
+                <Box
+                  sx={{
+                    flex: 1,
+                    minHeight: 0,
+                    overflow: "auto",
+                    px: 2,
+                    pb: 2,
+                    fontFamily: "Roboto Mono, monospace",
+                    fontSize: 13,
+                  }}
+                >
+                  {state ? (
+                    <JSONTree
+                      data={state}
+                      theme={jsonTreeTheme}
+                      invertTheme={false}
+                      hideRoot
+                      shouldExpandNodeInitially={(keyPath, data, level) =>
+                        level < 1
+                      }
+                    />
+                  ) : (
+                    <Typography variant="body2" color="text.secondary">
+                      {isConnected
+                        ? "Waiting for state…"
+                        : "Not connected yet."}
+                    </Typography>
+                  )}
+                </Box>
+              </Box>
+
+              <Box
+                sx={{
+                  flex: "1 1 50%",
+                  minHeight: 0,
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <Tabs
+                  value={tab}
+                  onChange={(e, v) => setTab(v)}
+                  sx={{ minHeight: 36, px: 2 }}
+                >
+                  <Tab label="Actions" sx={{ minHeight: 36 }} />
+                </Tabs>
+
+                {tab === 0 && (
+                  <Box
+                    sx={{
+                      flex: 1,
+                      minHeight: 0,
+                      overflow: "auto",
+                      p: 2,
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: 2,
+                      maxWidth: 640,
+                    }}
+                  >
+                    <Autocomplete
+                      freeSolo
+                      size="small"
+                      options={ACTION_OPTIONS}
+                      groupBy={(option) => option.moduleLabel}
+                      getOptionLabel={(option) =>
+                        typeof option === "string" ? option : option.type
+                      }
+                      inputValue={selectedType}
+                      onInputChange={(event, newInputValue) =>
+                        setSelectedType(newInputValue)
+                      }
+                      onChange={handleActionChange}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          label="Action type"
+                          placeholder="Pick from the registry, or type any action type"
+                          InputProps={{
+                            ...params.InputProps,
+                            sx: { fontFamily: "Roboto Mono, monospace" },
+                          }}
+                        />
+                      )}
+                    />
+
+                    <TextField
+                      label="Payload (JSON)"
+                      placeholder="Optional — leave empty for actions with no payload"
+                      multiline
+                      minRows={8}
+                      maxRows={16}
+                      value={payloadText}
+                      onChange={(e) => setPayloadText(e.target.value)}
+                      InputProps={{
+                        sx: {
+                          fontFamily: "Roboto Mono, monospace",
+                          fontSize: 13,
+                        },
+                      }}
+                    />
+
+                    {dispatchError && (
+                      <Alert
+                        severity="error"
+                        onClose={() => setDispatchError(null)}
+                      >
+                        {dispatchError}
+                      </Alert>
+                    )}
+
+                    <Box>
+                      <Button
+                        variant="contained"
+                        disabled={!isConnected}
+                        onClick={handleFire}
+                      >
+                        Fire Action
+                      </Button>
+                    </Box>
+                  </Box>
+                )}
+              </Box>
+            </Box>
+          </ThemeProvider>
+        );
+      }
+
+      createRoot(document.getElementById("root")).render(<App />);
+    </script>
+  </body>
 </html>
