@@ -62,10 +62,7 @@
           VIDEO_UPDATE_IS_IN_CALL: { type: 'boolean' },
           PERMISSIONS_GRANTED: { type: 'boolean' },
           EXECUTE_PT_COMMAND: { type: 'object', fields: { command: 'string' } },
-          EXECUTE_ZOOM_COMMAND: {
-            type: 'object',
-            fields: { command: 'string' },
-          },
+          EXECUTE_ZOOM_COMMAND: { type: 'object', fields: { command: 'string' } },
         },
         'module-ai-chatbot': {
           'AI_CHATBOT/SEND_MODEL_MESSAGE': { type: 'string' },
@@ -75,37 +72,18 @@
           'AI_CHATBOT/SET_OUTPUT_MUTED': { type: 'boolean' },
           'AI_CHATBOT/SET_AUDIO_OUTPUT_ENABLED': { type: 'boolean' },
           'AI_CHATBOT/SET_AUDIO_PLAYING': { type: 'boolean' },
-          'AI_CHATBOT/UPDATE_USER_MESSAGE': {
-            type: 'object',
-            fields: { messageId: 'string', text: 'string' },
-          },
+          'AI_CHATBOT/UPDATE_USER_MESSAGE': { type: 'object', fields: { messageId: 'string', text: 'string' } },
         },
         'module-ai-gemini': {
           'AI_GEMINI/SET_LOADING': { type: 'boolean' },
           'AI_GEMINI/SEND_LIVE_MESSAGE': { type: 'string' },
-          'AI_GEMINI/SET_WEBVIEW_SUMMARY': {
-            type: 'object',
-            fields: { markdown: 'string' },
-          },
-          'AI_GEMINI/SEND_PAGE_CONTENT': {
-            type: 'object',
-            fields: { reason: 'string', functionId: 'string' },
-          },
-          'AI_GEMINI/END_CHAT_SESSION': {
-            type: 'object',
-            fields: { functionId: 'string' },
-          },
-          'AI_GEMINI/MUTE_VOICE_INPUT': {
-            type: 'object',
-            fields: { functionId: 'string', reason: 'string' },
-          },
+          'AI_GEMINI/SET_WEBVIEW_SUMMARY': { type: 'object', fields: { markdown: 'string' } },
+          'AI_GEMINI/SEND_PAGE_CONTENT': { type: 'object', fields: { reason: 'string', functionId: 'string' } },
+          'AI_GEMINI/END_CHAT_SESSION': { type: 'object', fields: { functionId: 'string' } },
+          'AI_GEMINI/MUTE_VOICE_INPUT': { type: 'object', fields: { functionId: 'string', reason: 'string' } },
           'AI_GEMINI/UPDATE_TOKEN_COUNT': {
             type: 'object',
-            fields: {
-              inputTokens: 'number',
-              outputTokens: 'number',
-              turnTotalTokens: 'number',
-            },
+            fields: { inputTokens: 'number', outputTokens: 'number', turnTotalTokens: 'number' },
           },
         },
         'module-cash-recycler': {
@@ -117,18 +95,9 @@
             type: 'object',
             fields: { amount: 'number', deviceWillDispenseChange: 'boolean' },
           },
-          CASHR_START_TRANSACTION: {
-            type: 'object',
-            fields: { salePrice: 'number', transactionId: 'string' },
-          },
-          CASHR_CANCEL_TRANSACTION: {
-            type: 'object',
-            fields: { reason: 'string' },
-          },
-          CASHR_ON_TRANSACTION_END: {
-            type: 'object',
-            fields: { transactionId: 'string', exitCode: 'string' },
-          },
+          CASHR_START_TRANSACTION: { type: 'object', fields: { salePrice: 'number', transactionId: 'string' } },
+          CASHR_CANCEL_TRANSACTION: { type: 'object', fields: { reason: 'string' } },
+          CASHR_ON_TRANSACTION_END: { type: 'object', fields: { transactionId: 'string', exitCode: 'string' } },
         },
         'module-chat': { UPDATE_CHAT_MESSAGE: { type: 'string' } },
         'module-common-accessibility': {
@@ -140,18 +109,12 @@
         },
         'module-common-assets': {
           DOWNLOAD_ASSET: { type: 'string' },
-          ASSET_DOWNLOADED: {
-            type: 'object',
-            fields: { downloadUrl: 'string', localPath: 'string' },
-          },
+          ASSET_DOWNLOADED: { type: 'object', fields: { downloadUrl: 'string', localPath: 'string' } },
         },
         'module-common-contacts': { INSTANCE_DELETE_GROUP: { type: 'string' } },
         'module-common-kiosks': {
           PROCEED_CONFIRM_RESET: { type: 'string' },
-          DELETE_OVERRIDE: {
-            type: 'object',
-            fields: { kioskId: 'string', solutionId: 'string' },
-          },
+          DELETE_OVERRIDE: { type: 'object', fields: { kioskId: 'string', solutionId: 'string' } },
           LOAD_KIOSK_ID: { type: 'string' },
           CHOOSE_KIOSK_ID: { type: 'string' },
           LOAD_TEAMVIEWER_ID: { type: 'string' },
@@ -163,61 +126,37 @@
         },
         'module-common-remoteactions': {
           REMOVE_REMOTE_ACTION_FROM_QUEUE: { type: 'string' },
-          CREATE_REMOTE_ACTION: {
-            type: 'object',
-            fields: { to: 'string', shell: 'string' },
-          },
+          CREATE_REMOTE_ACTION: { type: 'object', fields: { to: 'string', shell: 'string' } },
         },
         'module-common-session': {
           SESSION_RESET: { type: 'none' },
           SESSION_MAX_LENGTH_TIMER_COUNTDOWN: { type: 'number' },
           SHOW_SPLASH_SCREEN: { type: 'boolean' },
           ACCEPT_SPLASH_SCREEN: { type: 'boolean' },
-          OPEN_TIMER_COUNTDOWN_DIALOG: {
-            type: 'object',
-            fields: { timerCountdown: 'number', type: 'string' },
-          },
+          OPEN_TIMER_COUNTDOWN_DIALOG: { type: 'object', fields: { timerCountdown: 'number', type: 'string' } },
           COUNTDOWN_FINISHED: { type: 'object', fields: { type: 'string' } },
         },
         'module-common-translations': {
           SET_CURRENT_LANGUAGE: { type: 'string' },
           SET_TRANSLATION_IN_PROGRESS: { type: 'boolean' },
           SET_SHOW_LANGUAGE_PICKER_MODAL: { type: 'boolean' },
-          TRANSLATE_ALL_SETTINGS: {
-            type: 'object',
-            fields: { instanceId: 'string' },
-          },
+          TRANSLATE_ALL_SETTINGS: { type: 'object', fields: { instanceId: 'string' } },
         },
         'module-core-auth': {
           SET_DELEGATE_UID: { type: 'string' },
           MANAGE_ACCOUNT: { type: 'string' },
           AUTH_EXPIRE: { type: 'string' },
-          SET_AUTH_DOMAINS: {
-            type: 'object',
-            fields: { name: 'string', ttl: 'number' },
-          },
-          AUTH_INIT: {
-            type: 'object',
-            fields: { env: 'string', token: 'string' },
-          },
+          SET_AUTH_DOMAINS: { type: 'object', fields: { name: 'string', ttl: 'number' } },
+          AUTH_INIT: { type: 'object', fields: { env: 'string', token: 'string' } },
         },
         'module-core-messages': { REMOVE_SNACKBAR: { type: 'string' } },
         'module-core-outofservice': { SET_ONLINE_STATUS: { type: 'boolean' } },
         'module-directory-voip': {
-          START_VOIP_DIRECTORY_CALL: {
-            type: 'object',
-            fields: { name: 'string', phoneNo: 'string', delay: 'number' },
-          },
+          START_VOIP_DIRECTORY_CALL: { type: 'object', fields: { name: 'string', phoneNo: 'string', delay: 'number' } },
         },
         'module-document-popup': {
-          CLOSE_DOCUMENT_POPUP: {
-            type: 'object',
-            fields: { numOfPages: 'number' },
-          },
-          SET_DOCUMENTS_SCANNED: {
-            type: 'object',
-            fields: { fileName: 'string', applicationType: 'string' },
-          },
+          CLOSE_DOCUMENT_POPUP: { type: 'object', fields: { numOfPages: 'number' } },
+          SET_DOCUMENTS_SCANNED: { type: 'object', fields: { fileName: 'string', applicationType: 'string' } },
         },
         'module-facelock': {
           OPEN_FACE_LOCK_SPLASH_SCREEN: { type: 'boolean' },
@@ -226,15 +165,9 @@
         },
         'module-facial-recognition': {
           TOGGLE_FACE_DETECTION: { type: 'boolean' },
-          SHOW_MEDIAPIPE_PREVIEW: {
-            type: 'object',
-            fields: { open: 'boolean', mode: 'string' },
-          },
+          SHOW_MEDIAPIPE_PREVIEW: { type: 'object', fields: { open: 'boolean', mode: 'string' } },
         },
-        'module-guest-popup': {
-          SET_PHOTO_IMAGE: { type: 'string' },
-          CLOSE_PHOTO_POPUP: { type: 'string' },
-        },
+        'module-guest-popup': { SET_PHOTO_IMAGE: { type: 'string' }, CLOSE_PHOTO_POPUP: { type: 'string' } },
         'module-homepage': {
           OPEN_HOMEPAGE_WEBVIEW: { type: 'string' },
           UPDATE_HOMEPAGE_LANGUAGE: { type: 'string' },
@@ -245,48 +178,26 @@
           ADD_COL_ROW_BUTTONS: { type: 'number' },
           DELETE_COL_ROW_BUTTONS: { type: 'number' },
           UPDATE_BUTTON_FACE_LOCK: { type: 'boolean' },
-          SET_BUTTON_LAYOUT: {
-            type: 'object',
-            fields: { columns: 'number', rows: 'number' },
-          },
-          UPDATE_IMG: {
-            type: 'object',
-            fields: { img: 'string', index: 'number' },
-          },
+          SET_BUTTON_LAYOUT: { type: 'object', fields: { columns: 'number', rows: 'number' } },
+          UPDATE_IMG: { type: 'object', fields: { img: 'string', index: 'number' } },
         },
         'module-instructional-popup': {
           ZLP_CONFIRM_DIALOG_RESPONSE: { type: 'boolean' },
-          OPEN_INSTRUCTIONAL_POPUP: {
-            type: 'object',
-            fields: { action: 'string', payload: 'string' },
-          },
+          OPEN_INSTRUCTIONAL_POPUP: { type: 'object', fields: { action: 'string', payload: 'string' } },
         },
         'module-lobby-attendant': {
-          START_CALL_WORKFLOW: {
-            type: 'object',
-            fields: { phoneNumber: 'string', name: 'string' },
-          },
+          START_CALL_WORKFLOW: { type: 'object', fields: { phoneNumber: 'string', name: 'string' } },
         },
         'module-message-twilio': {
           UPDATE_TEXT_MESSAGE: { type: 'string' },
           SEND_TEXT_MESSAGE_TWILIO: {
             type: 'object',
-            fields: {
-              phoneNumber: 'string',
-              message: 'string',
-              mediaUrl: 'string',
-            },
+            fields: { phoneNumber: 'string', message: 'string', mediaUrl: 'string' },
           },
-          OPEN_SEND_TEXT_MESSAGE_FORM: {
-            type: 'object',
-            fields: { phoneNo: 'string', name: 'string' },
-          },
+          OPEN_SEND_TEXT_MESSAGE_FORM: { type: 'object', fields: { phoneNo: 'string', name: 'string' } },
         },
         'module-microcontroller': { WEBSOCKET_CONNECTED: { type: 'boolean' } },
-        'module-modal-videoplayer': {
-          PLAY_VIDEO: { type: 'boolean' },
-          SET_WAIT_REPLAY_DELAY: { type: 'boolean' },
-        },
+        'module-modal-videoplayer': { PLAY_VIDEO: { type: 'boolean' }, SET_WAIT_REPLAY_DELAY: { type: 'boolean' } },
         'module-modal-voip': { MINIMIZE_VOIP_MODAL: { type: 'boolean' } },
         'module-modal-warning': { UPDATE_WARNING_MESSAGE: { type: 'string' } },
         'module-onscreen-keyboard': {
@@ -308,57 +219,30 @@
           CANCEL_TRANSACTION: { type: 'object', fields: { reason: 'string' } },
           REFUND_OWED: { type: 'object', fields: { amount: 'number' } },
           REFUND_ISSUED: { type: 'object', fields: { amount: 'number' } },
-          SET_TRANSACTION_PAYMENT_METHOD_ACK_ID: {
-            type: 'object',
-            fields: { paymentMethodAckId: 'string' },
-          },
-          SET_TRANSACTION_EXTERNAL_ID: {
-            type: 'object',
-            fields: { externalId: 'string' },
-          },
-          SET_TRANSACTION_CUSTOMER_ACK_ID: {
-            type: 'object',
-            fields: { customerAckId: 'string' },
-          },
+          SET_TRANSACTION_PAYMENT_METHOD_ACK_ID: { type: 'object', fields: { paymentMethodAckId: 'string' } },
+          SET_TRANSACTION_EXTERNAL_ID: { type: 'object', fields: { externalId: 'string' } },
+          SET_TRANSACTION_CUSTOMER_ACK_ID: { type: 'object', fields: { customerAckId: 'string' } },
         },
         'module-phidget-boolean': {
           PHIDGET_CLICK: { type: 'string' },
-          SET_PHIDGET_BOOLEAN: {
-            type: 'object',
-            fields: { id: 'string', isClosed: 'boolean' },
-          },
+          SET_PHIDGET_BOOLEAN: { type: 'object', fields: { id: 'string', isClosed: 'boolean' } },
         },
         'module-printing': {
           UPDATE_IS_OUT_OF_PAPER: { type: 'boolean' },
           UPDATE_IS_PRINTING: { type: 'boolean' },
           REMOVE_PRINT_JOB: { type: 'string' },
-          ADD_PRINT_JOB: {
-            type: 'object',
-            fields: { file: 'string', type: 'string', name: 'string' },
-          },
+          ADD_PRINT_JOB: { type: 'object', fields: { file: 'string', type: 'string', name: 'string' } },
         },
         'module-queue': {
           PUT_ME_IN_THE_QUEUE: { type: 'object', fields: { source: 'string' } },
-          ACCEPT_QUEUE_ASSIGNMENT: {
-            type: 'object',
-            fields: { kioskId: 'string' },
-          },
-          REJECT_QUEUE_ASSIGNMENT: {
-            type: 'object',
-            fields: { agentId: 'string', kioskId: 'string' },
-          },
-          REMOVE_FROM_THE_QUEUE: {
-            type: 'object',
-            fields: { kioskId: 'string' },
-          },
+          ACCEPT_QUEUE_ASSIGNMENT: { type: 'object', fields: { kioskId: 'string' } },
+          REJECT_QUEUE_ASSIGNMENT: { type: 'object', fields: { agentId: 'string', kioskId: 'string' } },
+          REMOVE_FROM_THE_QUEUE: { type: 'object', fields: { kioskId: 'string' } },
         },
         'module-scanning': {
           TWAIN_AVAILABLE: { type: 'boolean' },
           UPDATE_CURRENT_SCAN_JOB: { type: 'string' },
-          UPDATE_SCAN_ROTATION: {
-            type: 'object',
-            fields: { id: 'string', degrees: 'number' },
-          },
+          UPDATE_SCAN_ROTATION: { type: 'object', fields: { id: 'string', degrees: 'number' } },
           SCANNER_ENABLED: { type: 'boolean' },
           SCAN_RECEIVED: { type: 'string' },
         },
@@ -376,29 +260,14 @@
           STORAGE_DELETE: { type: 'string' },
           STORAGE_UPDATE: {
             type: 'object',
-            fields: {
-              storagePath: 'string',
-              fileName: 'string',
-              altText: 'string',
-              description: 'string',
-            },
+            fields: { storagePath: 'string', fileName: 'string', altText: 'string', description: 'string' },
           },
-          STORAGE_COPY: {
-            type: 'object',
-            fields: {
-              sourceId: 'string',
-              destinationId: 'string',
-              fileName: 'string',
-            },
-          },
+          STORAGE_COPY: { type: 'object', fields: { sourceId: 'string', destinationId: 'string', fileName: 'string' } },
         },
         'module-survey': {
           RESET_SURVEY: { type: 'string' },
           SET_CURRENT_SURVEY_PAGE: { type: 'string' },
-          SET_SURVEY_SUBMITTING: {
-            type: 'object',
-            fields: { surveyId: 'string', isSubmitting: 'boolean' },
-          },
+          SET_SURVEY_SUBMITTING: { type: 'object', fields: { surveyId: 'string', isSubmitting: 'boolean' } },
         },
         'module-tabs': {
           TAB_GO_BACK: { type: 'string' },
@@ -406,54 +275,26 @@
           TAB_SET_ACTIVE: { type: 'number' },
           DISABLE_WEBVIEW_TRANSLATIONS: { type: 'boolean' },
           REMOVE_TAB_MODULES: { type: 'object', fields: { modules: 'string' } },
-          TAB_SET_TITLE: {
-            type: 'object',
-            fields: { tabId: 'string', title: 'string' },
-          },
+          TAB_SET_TITLE: { type: 'object', fields: { tabId: 'string', title: 'string' } },
           TAB_SET_INIT: { type: 'object', fields: { url: 'string' } },
-          TAB_SET_HOME_PAGE: {
-            type: 'object',
-            fields: { moduleName: 'string', url: 'string' },
-          },
-          TAB_SET_CONTENT_LOADED: {
-            type: 'object',
-            fields: { moduleName: 'string' },
-          },
+          TAB_SET_HOME_PAGE: { type: 'object', fields: { moduleName: 'string', url: 'string' } },
+          TAB_SET_CONTENT_LOADED: { type: 'object', fields: { moduleName: 'string' } },
         },
         'module-voip-twilio': {
           VOIP_DIAL_NUMBER: { type: 'string' },
           TOGGLE_VOIP_CONTACTS_PICKER: { type: 'boolean' },
-          START_VOIP_CALL: {
-            type: 'object',
-            fields: { name: 'string', phoneNo: 'string', delay: 'number' },
-          },
+          START_VOIP_CALL: { type: 'object', fields: { name: 'string', phoneNo: 'string', delay: 'number' } },
         },
         'module-volume-control': {
           SET_MIC_VOLUME: { type: 'number' },
           SET_VOLUME: { type: 'number' },
-          SET_GROUP_VOLUME: {
-            type: 'object',
-            fields: { audioOutputGroup: 'string', volume: 'number' },
-          },
-          GROUP_VOLUME_UP: {
-            type: 'object',
-            fields: { audioOutputGroup: 'string' },
-          },
-          GROUP_VOLUME_DOWN: {
-            type: 'object',
-            fields: { audioOutputGroup: 'string' },
-          },
+          SET_GROUP_VOLUME: { type: 'object', fields: { audioOutputGroup: 'string', volume: 'number' } },
+          GROUP_VOLUME_UP: { type: 'object', fields: { audioOutputGroup: 'string' } },
+          GROUP_VOLUME_DOWN: { type: 'object', fields: { audioOutputGroup: 'string' } },
         },
-        'module-webfilter-navigation': {
-          WEBFILTER_NAVIGATION_BLOCK: { type: 'string' },
-        },
+        'module-webfilter-navigation': { WEBFILTER_NAVIGATION_BLOCK: { type: 'string' } },
         'module-webfilter': { WEBFILTER_BLOCK: { type: 'string' } },
-        'module-webview-workflows': {
-          WEBVIEW_WORKFLOW_TRIGGER: {
-            type: 'object',
-            fields: { type: 'string' },
-          },
-        },
+        'module-webview-workflows': { WEBVIEW_WORKFLOW_TRIGGER: { type: 'object', fields: { type: 'string' } } },
       };
 
       // ---------------------------------------------------------------------------
@@ -557,6 +398,7 @@
           connecting: { color: '#9e9e9e', label: 'Connecting…' },
           connected: { color: '#4caf50', label: 'Connected' },
           error: { color: '#f44336', label: 'Disconnected' },
+          timeout: { color: '#f44336', label: 'Timed out' },
           missing: { color: '#f44336', label: 'zamok.js not found' },
         };
         const { color, label } = map[status] || map.connecting;
@@ -582,9 +424,30 @@
         );
       }
 
+      // Guidance shown under the header when the connection isn't healthy, keyed
+      // by connectionStatus. Returns null for statuses that don't need a banner.
+      function connectionHelp(status, connectError) {
+        switch (status) {
+          case 'missing':
+            return "zamok.js didn't load. Make sure it's hosted next to this page (same folder) and loads before this page's script runs.";
+          case 'timeout':
+            return 'No response after 8 seconds. Confirm this origin is allowed in Zamok Dashboard > Settings > Webview > API Origins, and that this page is being shown inside a Zamok kiosk webview (not opened standalone).';
+          case 'error':
+            return (
+              'Connection failed' +
+              (connectError ? ': ' + connectError : '.') +
+              ' Confirm this origin is allowed in Zamok Dashboard > Settings > Webview > API Origins.'
+            );
+          default:
+            return null;
+        }
+      }
+
       function App() {
         const zamokRef = useRef(null);
         const [connectionStatus, setConnectionStatus] = useState('connecting');
+        const [connectError, setConnectError] = useState(null);
+        const [connectedOrigin, setConnectedOrigin] = useState(null);
         const [state, setState] = useState(null);
         const [lastAction, setLastAction] = useState(null);
         const [tab, setTab] = useState(0);
@@ -600,12 +463,29 @@
 
           // Standard connect flow per the shell-api README: construct the client,
           // then wait for `.ready` before doing anything else with it.
-          const zamok = window.Zamok.api();
+          //
+          // `topWindowOrigin` must be set to a truthy value (its value isn't itself
+          // validated) so the SDK walks up to the real top-level window when this
+          // page is embedded inside the Zamok kiosk shell (e.g. inside a Tabs or
+          // Webview module iframe). Without it, the SDK only posts messages to
+          // itself and the connection hangs on "Connecting…" forever. When this
+          // page IS the top-level window already, this has no effect.
+          const zamok = window.Zamok.api({ topWindowOrigin: window.location.origin });
           zamokRef.current = zamok;
 
+          // If nobody answers — wrong origin allow-list, page not actually shown
+          // inside Zamok, etc. — `.ready` never resolves or rejects on its own, so
+          // we add our own timeout to surface a helpful message instead of hanging
+          // on "Connecting…" indefinitely.
+          const timeoutId = setTimeout(() => {
+            setConnectionStatus((current) => (current === 'connecting' ? 'timeout' : current));
+          }, 8000);
+
           zamok.ready
-            .then(() => {
+            .then(({ origin }) => {
+              clearTimeout(timeoutId);
               setConnectionStatus('connected');
+              setConnectedOrigin(origin);
 
               zamok.getState().then((initialState) => setState(initialState));
 
@@ -620,7 +500,13 @@
                 });
               });
             })
-            .catch(() => setConnectionStatus('error'));
+            .catch((e) => {
+              clearTimeout(timeoutId);
+              setConnectionStatus('error');
+              setConnectError(String((e && e.message) || e));
+            });
+
+          return () => clearTimeout(timeoutId);
         }, []);
 
         const handleActionChange = (event, newValue) => {
@@ -657,6 +543,7 @@
         };
 
         const isConnected = connectionStatus === 'connected';
+        const help = connectionHelp(connectionStatus, connectError);
 
         return (
           <ThemeProvider theme={theme}>
@@ -673,7 +560,12 @@
                     Zamok API Console
                   </Typography>
                   <Box sx={{ flexGrow: 1 }} />
-                  <Tooltip title="This page's origin — must be allowed in Zamok Dashboard > Settings > Webview > API Origins">
+                  <Tooltip
+                    title={
+                      "This page's origin — must be allowed in Zamok Dashboard > Settings > Webview > API Origins" +
+                      (isConnected && connectedOrigin ? '. Responded from origin: ' + connectedOrigin : '')
+                    }
+                  >
                     <Chip
                       size="small"
                       variant="outlined"
@@ -685,6 +577,12 @@
                 </Toolbar>
               </AppBar>
 
+              {help && (
+                <Alert severity="warning" sx={{ borderRadius: 0 }}>
+                  {help}
+                </Alert>
+              )}
+
               <Box
                 sx={{
                   flex: '1 1 50%',
@@ -695,15 +593,7 @@
                   borderColor: 'divider',
                 }}
               >
-                <Box
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 1,
-                    px: 2,
-                    py: 1,
-                  }}
-                >
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, px: 2, py: 1 }}>
                   <Typography variant="overline" sx={{ letterSpacing: 1 }}>
                     State
                   </Typography>
@@ -751,14 +641,7 @@
                 </Box>
               </Box>
 
-              <Box
-                sx={{
-                  flex: '1 1 50%',
-                  minHeight: 0,
-                  display: 'flex',
-                  flexDirection: 'column',
-                }}
-              >
+              <Box sx={{ flex: '1 1 50%', minHeight: 0, display: 'flex', flexDirection: 'column' }}>
                 <Tabs value={tab} onChange={(e, v) => setTab(v)} sx={{ minHeight: 36, px: 2 }}>
                   <Tab label="Actions" sx={{ minHeight: 36 }} />
                 </Tabs>
@@ -790,10 +673,7 @@
                           {...params}
                           label="Action type"
                           placeholder="Pick from the registry, or type any action type"
-                          InputProps={{
-                            ...params.InputProps,
-                            sx: { fontFamily: 'Roboto Mono, monospace' },
-                          }}
+                          InputProps={{ ...params.InputProps, sx: { fontFamily: 'Roboto Mono, monospace' } }}
                         />
                       )}
                     />
@@ -806,12 +686,7 @@
                       maxRows={16}
                       value={payloadText}
                       onChange={(e) => setPayloadText(e.target.value)}
-                      InputProps={{
-                        sx: {
-                          fontFamily: 'Roboto Mono, monospace',
-                          fontSize: 13,
-                        },
-                      }}
+                      InputProps={{ sx: { fontFamily: 'Roboto Mono, monospace', fontSize: 13 } }}
                     />
 
                     {dispatchError && (
